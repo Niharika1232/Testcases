@@ -4,24 +4,27 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class Amazon {
+import reusable.CommonMethods;
+
+public class Amazon extends CommonMethods {
 	static WebDriver driver;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+	
 		System.setProperty("WebDriver.Chrome.Driver", "chromedriver.exe");
 		 driver=new ChromeDriver();
-		driver.get("https://www.amazon.in/");
-		driver.manage().window().maximize();
-		String title=title();
+		 
+		CommonMethods.url("https://www.amazon.in/", driver);
+		CommonMethods.maximize(driver);
+		String title=title(driver);
 		System.out.println(title);
-        click(By.xpath("//a[contains(text(),'Mobiles')]"));
+      CommonMethods.click(By.xpath("//a[contains(text(),'Mobiles')]"), driver);
 
-
-        String title1=title();
+        String title1=title(driver);
         System.out.println(title1);
         driver.navigate().back();
-        String title2=title();
+        String title2=title(driver);
         System.out.println(title2);
         if(title.equals(title2))
         {
@@ -33,14 +36,8 @@ public class Amazon {
         }
         driver.close();
 	    }
-        public static void click(By xpath)
-       {
-	    driver.findElement(xpath).click();
-        }
-        public static String title()
-        {
-	    return driver.getTitle();
-	
-       }
+        
+        
+       
 
        }
